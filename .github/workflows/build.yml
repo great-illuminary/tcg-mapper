@@ -54,6 +54,12 @@ jobs:
           echo ./changelogs/${{ steps.read_version.outputs.version }}.txt
           echo ${{ steps.read_version.outputs.version }}
 
+      - name: Release the new json versions
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: ./changelogs/${{ steps.read_version.outputs.version }}.txt
+          tag_name: ${{ steps.read_version.outputs.version }}
+
       - uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
