@@ -1,0 +1,66 @@
+name: Build
+
+on: [ push ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Build
+        id: build
+        run: |
+          bash ./scripts/check.sh
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      checks: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Build
+        id: build
+        run: |
+          ./gradlew :tcg-mapper:assemble
+
+      - name: Read tag
+        id: read_version
+        uses: christian-draeger/read-properties@1.1.1
+        with:
+          path: './gradle.properties'
+          properties: 'version'
+
+      - name: Output
+        run: |
+          echo library/quick_map/assets/*
+          echo ./changelogs/${{ steps.read_version.outputs.version }}.txt
+          echo ${{ steps.read_version.outputs.version }}
+
+      - uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
+          username: Github
+          avatar_url: https://lorcana.codlab.eu/discord_avatar.png
+          title: "New version for the TCG Mapper library is ready!"
+          description: |
+            Version `${{ steps.read_version.outputs.version }}`
+            Click [here](https://github.com/great-illuminary/tcg-mapper/releases/tag/${{ steps.read_version.outputs.version }})
