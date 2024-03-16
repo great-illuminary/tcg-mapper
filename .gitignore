@@ -5,9 +5,6 @@
 .idea/
 local.properties
 .DS_Store
-library/lorcana-data/src/commonMain/resources/MR
-library/quick_map/assets
-data_existing/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -29,4 +26,3 @@ gradle-app.setting
 
 node_modules/
 *.js
-images/*
