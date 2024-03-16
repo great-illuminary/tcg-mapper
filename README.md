@@ -50,8 +50,10 @@ val loader: Loader<SWU> = Loader(
     myMokoLocalFile,
     "myMokoLocalFile",
     SWU.serializer(),
-    "great-illuminary",
-    "some-repo"
+    GithubConfiguration(
+        "great-illuminary",
+        "some-repo"
+    )
 )
 
 // ...

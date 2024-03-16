@@ -1,6 +1,6 @@
 package eu.codlab.tcgmapper
 
-object GithubConfiguration {
-    var githubGroup: String = ""
-    var githubRepo: String = ""
-}
+data class GithubConfiguration(
+    var githubGroup: String,
+    var githubRepo: String
+)

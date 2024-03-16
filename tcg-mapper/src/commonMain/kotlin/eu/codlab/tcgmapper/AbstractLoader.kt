@@ -8,16 +8,14 @@ open class AbstractLoader<T>(
     fileResource: FileResource,
     file: String,
     serializer: KSerializer<T>,
-    githubGroup: String = GithubConfiguration.githubGroup,
-    githubRepo: String = GithubConfiguration.githubRepo
+    github: GithubConfiguration
 ) {
 
     private val loader: Loader<T> = Loader(
         fileResource,
         file,
         serializer,
-        githubGroup,
-        githubRepo
+        github
     )
 
     suspend fun loadFromGithub(tag: String = "main") = loader.loadFromGithub(tag)

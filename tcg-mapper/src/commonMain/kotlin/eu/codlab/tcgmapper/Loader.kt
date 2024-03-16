@@ -10,16 +10,15 @@ data class Loader<T>(
     private val fileResource: FileResource,
     private val file: String,
     private val serializer: KSerializer<T>,
-    private val githubGroup: String = GithubConfiguration.githubGroup,
-    private val githubRepo: String = GithubConfiguration.githubRepo
+    private val github: GithubConfiguration
 ) {
 
     suspend fun loadFromGithub(tag: String = "main"): T {
         return Provider.yaml.decodeFromString(
             serializer,
             dataFileContent(
-                GithubConfiguration.githubGroup,
-                GithubConfiguration.githubRepo,
+                github.githubGroup,
+                github.githubRepo,
                 tag,
                 file
             )
