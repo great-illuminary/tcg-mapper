@@ -26,3 +26,4 @@ gradle-app.setting
 
 node_modules/
 *.js
+kotlin-js-store/yarn.lock

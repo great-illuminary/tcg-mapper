@@ -5,7 +5,6 @@ plugins {
     alias(dolbyio.plugins.android.library)
     alias(dolbyio.plugins.kotlin.multiplatform)
     alias(dolbyio.plugins.kotlin.serialization)
-    alias(dolbyio.plugins.multiplatform.moko.resources.generator)
     alias(dolbyio.plugins.multiplatform.buildkonfig)
     id("jvmCompat")
     id("publication")
@@ -39,7 +38,7 @@ kotlin {
                 api(dolbyio.multiplatform.file.access)
                 api(dolbyio.multiplatform.http.client)
 
-                api("net.mamoe.yamlkt:yamlkt:0.13.0")
+                api(libs.yaml)
             }
         }
         val commonTest by getting {
@@ -70,12 +69,6 @@ kotlin {
 
 android {
     namespace = "eu.codlab.tcgmapper"
-}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "eu.codlab.tcgmapper.resources"
-    multiplatformResourcesClassName = "Resources"
-    multiplatformResourcesVisibility = dev.icerock.gradle.MRVisibility.Public
 }
 
 buildkonfig {

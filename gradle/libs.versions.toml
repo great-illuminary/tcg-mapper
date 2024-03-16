@@ -1,5 +1,7 @@
 [versions]
 moko-resources = "0.23.0"
+yaml = "0.13.0"
 
 [libraries]
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
+yaml = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yaml" }
