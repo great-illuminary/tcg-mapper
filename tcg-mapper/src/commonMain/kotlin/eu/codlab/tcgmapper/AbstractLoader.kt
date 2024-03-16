@@ -4,12 +4,12 @@ import dev.icerock.moko.resources.FileResource
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.StringFormat
 
-data class AbstractLoader<T>(
-    private val fileResource: FileResource,
-    private val file: String,
-    private val serializer: KSerializer<T>,
-    private val githubGroup: String = GithubConfiguration.githubGroup,
-    private val githubRepo: String = GithubConfiguration.githubRepo
+open class AbstractLoader<T>(
+    fileResource: FileResource,
+    file: String,
+    serializer: KSerializer<T>,
+    githubGroup: String = GithubConfiguration.githubGroup,
+    githubRepo: String = GithubConfiguration.githubRepo
 ) {
 
     private val loader: Loader<T> = Loader(
