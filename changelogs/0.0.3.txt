@@ -1,0 +1,3 @@
+**Improves**
+
+- Structure of the github's definition
