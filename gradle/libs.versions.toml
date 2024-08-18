@@ -1,7 +1,9 @@
 [versions]
-moko-resources = "0.23.0"
+moko-resources = "0.24.1"
+moko-resources-ext = "1.15.2"
 yaml = "0.13.0"
 
 [libraries]
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
+multiplatform-moko-resources-ext = { module = "eu.codlab:kotlin-moko-resources-ext", version.ref = "moko-resources-ext" }
 yaml = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yaml" }

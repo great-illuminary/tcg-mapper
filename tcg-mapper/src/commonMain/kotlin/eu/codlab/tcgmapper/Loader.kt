@@ -12,7 +12,6 @@ data class Loader<T>(
     private val serializer: KSerializer<T>,
     private val github: GithubConfiguration
 ) {
-
     suspend fun loadFromGithub(tag: String = "main"): T {
         return Provider.yaml.decodeFromString(
             serializer,

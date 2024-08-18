@@ -6,9 +6,11 @@ pluginManagement {
     }
 }
 
-ext.DOLBYIO_GRADLE_VERSION_USED = "v1.7.1"
+def commonProps = new Properties()
+new File(rootProject.projectDir, "gradle.properties").withInputStream { commonProps.load(it) }
+ext.GRADLE_EXTENDED_VERSION_USED = commonProps.getProperty("GRADLE_EXTENDED_VERSION_USED")
 
-apply from: "https://raw.githubusercontent.com/voxeet/voxeet-sdk-android-gradle/${ext.DOLBYIO_GRADLE_VERSION_USED}/dolbyio.gradle"
+apply from: "https://raw.githubusercontent.com/the-inkwell/gradle-tools/${ext.GRADLE_EXTENDED_VERSION_USED}/extended.gradle"
 
 dependencyResolutionManagement {
     repositories {
@@ -19,11 +21,12 @@ dependencyResolutionManagement {
         mavenLocal()
     }
     versionCatalogs {
-        dolbyio {
-            from(files(gradle.dolbyio.files.catalog))
+        additionals {
+            from(files(gradle.extended.files.catalog))
         }
     }
 }
 
+includeBuild "gradle/extended/${ext.GRADLE_EXTENDED_VERSION_USED}/kt-plugins"
+
 include(":tcg-mapper")
-includeBuild "gradle/dolbyio/${ext.DOLBYIO_GRADLE_VERSION_USED}/kt-plugins"

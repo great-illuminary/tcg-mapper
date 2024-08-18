@@ -10,7 +10,6 @@ open class AbstractLoader<T>(
     serializer: KSerializer<T>,
     github: GithubConfiguration
 ) {
-
     private val loader: Loader<T> = Loader(
         fileResource,
         file,

@@ -1,0 +1,42 @@
+/* * * * * * * * * * * * * * * * *
+ * Default project info
+ * * * * * * * * * * * * * * * * */
+def defaultVersion = "0.0.4"
+def defaultGroup = "eu.codlab"
+
+def repo = "great-illuminary/tcg-mapper"
+
+def propSuffix = { prefix, suffixKeyName ->
+    return rootProject.properties.containsKey(suffixKeyName)
+            ? "${prefix}-${rootProject.properties[suffixKeyName]}" : prefix
+}
+
+ext {
+    prop = { name, defValue ->
+        return rootProject.properties.containsKey(name)
+                ? rootProject.properties[name] : defValue
+    }
+
+    pomDescription = "Kotlin Multiplatform TCG Mapper"
+    pomInceptionYear = "${new Date().format("YYYY")}"
+    pomUrl = "https://github.com/$repo"
+    pomLicenseName = "MIT License"
+    pomLicenseUrl = "https://github.com/$repo/blob/main/LICENSE"
+    pomLicenseDistribution = ""
+    pomDeveloperId = "codlab"
+    pomDeveloperName = "Kevin Le Perf"
+    pomDeveloperOrganization = "Codlabtech"
+    pomDeveloperOrganizationUrl = "https://codlab.eu"
+    pomScmUrl = "scm:git:github.com/${repo}.git"
+
+    sonarUrl = prop("sonarUrl", null)
+    sonarToken = prop("sonarToken", null)
+
+    signingKeyId = prop("signing.keyId", null)
+
+    group = prop("GROUP_ID", defaultGroup)
+    version = propSuffix(defaultVersion, "SUFFIX")
+
+    projectVersionCode = 1
+    publishWithSources = true
+}
