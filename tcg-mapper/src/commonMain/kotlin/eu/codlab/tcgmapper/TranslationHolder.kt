@@ -3,10 +3,10 @@ package eu.codlab.tcgmapper
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TranslationHolder<T>(
-    val en: T,
-    val fr: T? = null,
-    val de: T? = null,
-    val it: T? = null,
-    val es: T? = null
+data class TranslationHolder(
+    val en: String,
+    val fr: String? = null,
+    val de: String? = null,
+    val it: String? = null,
+    val es: String? = null
 )
