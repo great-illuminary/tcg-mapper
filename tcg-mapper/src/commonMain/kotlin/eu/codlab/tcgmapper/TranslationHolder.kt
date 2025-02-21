@@ -8,5 +8,7 @@ data class TranslationHolder(
     val fr: String? = null,
     val de: String? = null,
     val it: String? = null,
-    val es: String? = null
+    val es: String? = null,
+    val zh: String? = null,
+    val ja: String? = null
 )
