@@ -1,16 +1,14 @@
 package eu.codlab.tcgmapper
 
-import dev.icerock.moko.resources.FileResource
-import eu.codlab.moko.ext.safelyReadContent
 import eu.codlab.tcgmapper.GithubDefinitions.dataFileContent
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.StringFormat
 
 data class Loader<T>(
-    private val fileResource: FileResource,
     private val file: String,
     private val serializer: KSerializer<T>,
-    private val github: GithubConfiguration
+    private val github: GithubConfiguration,
+    private val fileResource: suspend () -> ByteArray,
 ) {
     suspend fun loadFromGithub(tag: String = "main"): T {
         return Provider.yaml.decodeFromString(
@@ -25,7 +23,12 @@ data class Loader<T>(
     }
 
     suspend fun loadFromResource(): T {
-        return Provider.yaml.decodeFromString(serializer, fileResource.safelyReadContent())
+        val file = fileResource()
+
+        return Provider.yaml.decodeFromString(
+            serializer,
+            io.ktor.utils.io.core.String(file)
+        )
     }
 
     fun to(values: T, encoder: StringFormat = Provider.json): String {

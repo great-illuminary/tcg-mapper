@@ -1,20 +1,19 @@
 package eu.codlab.tcgmapper
 
-import dev.icerock.moko.resources.FileResource
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.StringFormat
 
 open class AbstractLoader<T>(
-    fileResource: FileResource,
     file: String,
     serializer: KSerializer<T>,
-    github: GithubConfiguration
+    github: GithubConfiguration,
+    fileResource: suspend () -> ByteArray,
 ) {
     private val loader: Loader<T> = Loader(
-        fileResource,
         file,
         serializer,
-        github
+        github,
+        fileResource,
     )
 
     suspend fun loadFromGithub(tag: String = "main") = loader.loadFromGithub(tag)

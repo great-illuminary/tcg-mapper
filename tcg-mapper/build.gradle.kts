@@ -27,8 +27,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.moko.resources)
-                api(libs.multiplatform.moko.resources.ext)
                 api(additionals.kotlinx.coroutines)
                 api(additionals.kotlinx.serialization.json)
                 api(additionals.multiplatform.file.access)
